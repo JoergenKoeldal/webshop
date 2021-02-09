@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import webshop.demo.model.PictureLink;
 import webshop.demo.model.Product;
 import webshop.demo.model.ProductDescription;
@@ -41,15 +42,23 @@ public class WebshopController {
 
     @PostMapping("/createNewProduct/submit")
     public String createProductSubmit(Product product, PictureLink pictureLink, ProductDescription productDescription) {
-        productService.createProduct(product);
-        productService.createPictureLink(pictureLink);
-        productService.createProductDescription(productDescription);
+        productService.createProduct(product, pictureLink, productDescription);
         return "redirect:/createNewProduct";
     }
 
-    @GetMapping("/updateProduct")
-    public String updateProduct() {return "webShop";}
 
+    @GetMapping("/updateProduct")
+    public String updateProduct(@RequestParam long productId, Model model) {
+        model.addAttribute("product", productService.getProduct(productId));
+        return "updateProduct";
+    }
+
+    @PostMapping("/updateProduct/submit")
+    public String updateProductSubmit(Product product){
+        productService.updateProduct(product);
+
+        return "redirect:/";
+    }
 
 
 

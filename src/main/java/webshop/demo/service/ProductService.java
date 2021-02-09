@@ -17,17 +17,14 @@ public class ProductService {
         this.webshopDAO = webshopDAO;
     }
 
-    public void createProduct(Product product){
-        webshopDAO.createProduct(product);
+    public void createProduct(Product product, PictureLink pictureLink, ProductDescription productDescription){
+        webshopDAO.createProduct(product, pictureLink, productDescription);
+
 
     }
 
-    public void createProductDescription(ProductDescription productDescription) {
-        webshopDAO.createDescription(productDescription);
-    }
-
-    public void createPictureLink(PictureLink pictureLink) {
-        webshopDAO.createPictureLink(pictureLink);
+    public void updateProduct(Product product){
+        webshopDAO.updateProduct(product);
     }
 
     public List<Product> getProductList(){
